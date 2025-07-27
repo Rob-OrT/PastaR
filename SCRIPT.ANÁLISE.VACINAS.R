@@ -17,7 +17,7 @@ library(dendextend)
 # BLOCO 1 – ANÁLISE REGIONAL TEMPORAL (2020–2024)
 # ====================================================
 
-# Inserção dos dados regionais diretamente no script:
+#REGIAO
 dados_regionais <- tribble(
   ~Regiao, ~Ano, ~BCG, ~HBV, ~DTP_HB_Hib, ~IPV, ~PCV10, ~HRV, ~MenC,
   "Centro-Oeste", 2020, 80.50, 71.50, 80.42, 80.47, 86.57, 81.72, 83.71,
@@ -47,7 +47,7 @@ dados_regionais <- tribble(
   "Sul", 2024, 94.94, 94.30, 92.74, 92.81, 94.38, 91.66, 89.69
 )
 
-# Transformação em formato longo para visualização
+# Transformar em formato longo para visualização
 dados_longos <- melt(dados_regionais, id.vars = c("Regiao", "Ano"),
                      variable.name = "Vacina", value.name = "Cobertura")
 
@@ -64,7 +64,7 @@ dados_z <- dados_regionais %>%
   select(-Regiao, -Ano) %>%
   scale()
 
-# Criação do objeto com informações de região e ano
+# Criar objeto com informações de região e ano
 info <- dados_regionais %>%
   select(Regiao, Ano)
 
@@ -94,7 +94,7 @@ for (vac in colnames(dados_z)) {
 # BLOCO 2 – CLUSTERIZAÇÃO DOS ESTADOS EM 2024
 # ====================================================
 
-# Inserção direta dos dados estaduais no script:
+# estados
 dados_estaduais <- tribble(
   ~Estado, ~BCG, ~HBV, ~DTP_HB_Hib, ~IPV, ~PCV10, ~HRV, ~MenC,
   "AC", 95.22, 93.21, 87.04, 85.78, 93.06, 83.24, 87.36,
@@ -158,10 +158,6 @@ for (vac in colnames(vacinas_uf)) {
   print(anova(aov(vacinas_uf[, vac] ~ dados_estaduais$Cluster)))
 }
 
-
-# ====================================================
-# DESCRITIVA ADICIONAL – REGIONAL E ESTADUAL
-# ====================================================
 
 # ---- Análise Descritiva Regional (2020–2024) ----
 cat("===== ANÁLISE DESCRITIVA REGIONAL =====\n")
